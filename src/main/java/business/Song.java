@@ -9,17 +9,36 @@ public class Song {
     private String album;
     private double rating;
     private String genre;
-    private final String [] tags;
+    private String [] tags;
     private int tagCount;
 
-    public Song(String title, String artist, String album, double rating, String genre, String[] tags) {
+    public Song(String title, String artist, String album,
+                double rating, String genre, String[] initialTags) {
+
         this.title = title;
         this.artist = artist;
         this.album = album;
         this.rating = rating;
         this.genre = genre;
-        this.tags = tags;
-        this.tagCount = tags.length;
+
+        // creating initial capacity for the internal tags storage
+        int capacity = 0;
+        if (initialTags != null) {
+            capacity = initialTags.length * 2; // x2 space for future addTag calls
+        }
+
+        // Create internal storage for tags
+        this.tags = new String[capacity];
+        this.tagCount = 0;
+
+        /*
+         * Insert each initial tag using addTag(...) so we won't have duplicates and tags will remain sorted
+         */
+        if (initialTags != null) {
+            for (int i = 0; i < initialTags.length; i++) {
+                addTag(initialTags[i]);
+            }
+        }
     }
 
     public String getTitle() {
