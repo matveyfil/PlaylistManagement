@@ -261,11 +261,16 @@ public class Song {
                 String nextTag = "";
                 if (tags[i] != null) nextTag = tags[i];
 
-                tagPart = tagPart + "~~" + nextTag;
+                tagPart = tagPart + ", " + nextTag;
             }
         }
 
-        // Combine everything with "%%" separators
-        return t + "%%" + a + "%%" + al + "%%" + ratingStr + "%%" + g + "%%" + tagPart;
+        // Combine everything together in user-friendly manner
+        return "Title : " + t + "\n"
+                + "Artist: " + a + "\n"
+                + "Album : " + al + "\n"
+                + "Rating: " + ratingStr + "\n"
+                + "Genre : " + g + "\n"
+                + "Tags  : " + tagPart;
     }
 }
